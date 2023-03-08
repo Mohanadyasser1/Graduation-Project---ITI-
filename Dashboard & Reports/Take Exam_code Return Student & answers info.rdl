@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
+  <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource1">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>Data Source=.;Initial Catalog=Exams</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
+      <rd:DataSourceID>d56a361e-a671-46e6-9e5f-2ad9aab5101e</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@st_id">
+            <Value>=Parameters!st_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ex_id">
+            <Value>=Parameters!ex_id.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT        questions.question_content, st_answer.st_answer_id
+FROM            st_answer INNER JOIN
+                         questions ON st_answer.ques_id = questions.question_id
+WHERE        (st_answer.st_id = @st_id) AND (st_answer.exam_id = @ex_id)</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="question_content">
+          <DataField>question_content</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="st_answer_id">
+          <DataField>st_answer_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Student answer &amp; question by ID</Value>
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>24pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>textbox1</rd:DefaultName>
+            <Height>0.43in</Height>
+            <Width>5in</Width>
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="table1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>5.11458in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.84375in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.42313in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>question content</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#666666</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>st answer id</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#666666</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <FontFamily />
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox3</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.41313in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="question_content">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!question_content.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>question_content</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="st_answer_id">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!st_answer_id.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>st_answer_id</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                  <RepeatOnNewPage>true</RepeatOnNewPage>
+                  <KeepTogether>true</KeepTogether>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="table1_Details_Group">
+                    <DataElementName>Detail</DataElementName>
+                  </Group>
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
+                  <DataElementName>Detail_Collection</DataElementName>
+                  <DataElementOutput>Output</DataElementOutput>
+                  <KeepTogether>true</KeepTogether>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet1</DataSetName>
+            <Top>0.87444in</Top>
+            <Left>0.17708in</Left>
+            <Height>0.83626in</Height>
+            <Width>8.95833in</Width>
+            <ZIndex>1</ZIndex>
+            <Style />
+          </Tablix>
+          <Image Name="Image1">
+            <Source>Embedded</Source>
+            <Value>download3</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>0.1in</Top>
+            <Left>7.91666in</Left>
+            <Height>0.625in</Height>
+            <Width>1.4375in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+        </ReportItems>
+        <Height>1.88778in</Height>
+        <Style />
+      </Body>
+      <Width>9.88542in</Width>
+      <Page>
+        <LeftMargin>1in</LeftMargin>
+        <RightMargin>1in</RightMargin>
+        <TopMargin>1in</TopMargin>
+        <BottomMargin>1in</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="st_id">
+      <DataType>String</DataType>
+      <Prompt>st id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ex_id">
+      <DataType>String</DataType>
+      <Prompt>ex id</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>2</NumberOfColumns>
+      <NumberOfRows>1</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>st_id</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>ex_id</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <EmbeddedImages>
+    <EmbeddedImage Name="download3">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>iVBORw0KGgoAAAANSUhEUgAAASwAAACFCAMAAADWxzXVAAAAwFBMVEX///+/Jy21JCf67u/LTlPtw8XBLjTAKzHNVVn19fX78vPqurv9+Pi+P0H25OXwy83JX2HDNDnx0dPinqCZmZmjo6PCwsLg4OBmZmZMTEzJycnR0dHw8PBeXl5RUVFZWVm4uLitra1FRUXe3t5/f3+MjIx3d3fp6elBQUGUlJTglZhlZWVubm7agoUZGRmnp6fFO0HTa2/WhIY0NDQnJyfEUFLosLLIRkv02tvVcnXSZmrRd3m5MTTblZYODg7HWFuatUdzAAAIw0lEQVR4nO2dCVfiPBRAA8gSRByge7pvKRAEHUVGnY///6++pIUBrJRdKuR6pD1tgHBP8vqSFgoAh8PhcDjZlCbtZuPclfgRNMqDm1Hr9c+4fu6a5J9Sr1WIqT5Ozl2XvFMfVAtzas1z1ybndBauCoV3HriyaL4uuSq07s9dn1xTrizLKvTOXZ9c01txVXjj/TCDwaqsGk8fMvjUsqa8ZWVwW12RNTh3fXLNZLTsqlI+d31yTeNpJb6Xzl2ffNOcLly9ts9dm7zTfJunWje8E26k3qmNKtXWzRMfGW5DfVK+bfNwxeGchUb7nsJnlLeiVKtUKq3R23jCfW2kdDPLGkY9fijcxD9ZNMm65Y0rmyVZhVaPT89ksiyrUHnibSuLFVmFSofbymBVVmHEz1dk8ElW4Y2HrfV8lsUn/zL4LKvwh0ettaRkjfjlDmtJyarwEL+WlKzC+NxVyi9pWb3Snlx+sEvLGt3sR+3y+29a1q5URq8tdp72CpKOQ2W13suT5uR2WuWyNrsaJ5GqNKhyWRtYDLxLb1zWBmqLs2f3Iy4rm6XLBBuPXFYm1dulVxpwWVzWEod1w6fFC9XfuKxsbhYBvswD/AaqvX+pw5SnDpuYnz1rPvKkdDOV6XjSvO/d8LHhVlRHo/hLZdcoqzroLBhU1u9LcfnXSmRPK7db
+q/suv/FkwmXtAJe1A1zWDhxLVmNSHicjxcnTxV5dchRZjfbTr7uP4q9Y0m31Yr+FdwxZ7fePIoPL2iir0bkrFrmsrWSVZs0qJUvUlkrZxNe3qQ5kpYbi3h/ntBwqq/5eLH4ty1j6yJ4rOHCb6th9WswPD/lEJ+RAWY2n4jayJHcrVQA4ES0Ityz87Rwoa/yRKQsCHdNVaLuYCdA9PHseZH9sW/zANuhsiYLfkpzIgrIMk4J4qw78HRwmq3lTzJLlkMCyFASC6MEMABwaiuFjAAMnVLxAIJYhaYpl2VSJ2O+TYSD70QN9mihQbaSv9Okef6hYZpATXYfJ+lvMlCX8ZyDZN3XsRAgDR0UQ+30dRr8dGSrPQ+y4KnvwgGgiXTOfZdoNqZfAB7Ip6FByNag+dzEyhe/Skc1BskqvG2Q9ewBgF8UxSzclulV3JRgFdEVhodxiodwY6iY7ctqxLBjLctheIBLoErpim/mIYgfJKn9skMXiOqSSmCw5ktlmX4Qus6aw+K8I8QMyWT+T3YWsMD46eCo2bbpEaj764UGyBsX9ZREHLGRZrOVgdUnWkJX1VDlujpcgq/6yiyxdZX0NmnZalmwyj+j3QpZI2Es4ff1iZDXvdpEFBINmBaKJ07JAGNAUIaQxy45wLMtTbebIhlciqz8EgspkWRLQWISGvhUqBgJQTcny+kQghLYvbBg+7NIDgGSR0OpC9mQqy7x0WTRZkOPhIdKBjuInyBJiwUnCyW4ANHn2oEtDDdJDJy1JjbGtuqbFJZgmqIFccDpZFwiXtQNc1g5wWTtwMllwRvotcXpTQj4OeRmcShYmhmGahqHIn98R9tGauoTS0T7WaTiVLIgQ8k36kGpaUF2XCLDJmlxzypglKF+9I5eVKQtJEss3aZ7JklIqC0ks10R6sqQ5p22zAvE0oGYnhT26DyfJrO6dUMAunF4WFNSQqHRwgyxLMX0dqsQ1IwVD03D7ah8DPbSCkI0FqSzM1k2b
+jiEtxVAsSWUhL+h+h4ktOL0sSaUNQ4o8aAkQ4L4IowhBbA5h5HpAtwQQEJ2VkpmsoB+vY8lkg+5nROjgUV/bb7+b08sKu2wQTQSkspzBc6DLhtACgRGb4BNJMlYGoUBl6Wbc74gTNybsepqqA1vJxzzpN8iCpkUopi8ZydYkwDtktjRwPJlF7VFZcjK9IAS+zUoaHjRsmJ+4X6+dumUZQ5mCZCmeDgX6Z1m6Gcfvrk9lzcQF3W7csmgHtg1NXZvFfjeNx1PL6rKTEjC0ZZdJkYLPsgCLSzR42VQWjGfmsalp1CCNWR5dt/IS3kHqd6iPL8tTRVkWaPPwCW1eppaSJamOh0ICWYCX3Nm62PcJYXrjM0R54b51MllOEC+QQkc99BPrgdWnPiBhQZy2sGTp03/Dsnza13wtWQ90gDFGMmYdNJmNzwml2slkgflRbD6cTsbVs/P1/5bz7cmGZN1hfRe5NAmzcjVgHFdPJmt/sOHbIjsRnZfp9xmlaQ5lAUxTLRbT8LopijNRHuVQVl5pdCpc1tY0nqonkIXW5JJ6eorrR1Ff+kLTMU+yfkYPqEDnNwLySqLZTc2m5pp6b3R0WUb6MlrsyknL0tSl1rV+NjCnNMrTysllQS9KuiCUXPzPFsSu9NM6Zmn8a3RsWZqohWTIJkUDEkrAUR9UouOu7kcPpgADlhUgYWg+REQH0A5DMTdD5o3UJ+M/tdeVW36s3mZm96toHlzRtgj06OhPMm1diySZXRKDHRdh6Nq0lG1h5DoygL4haaSfqwx0E/Xmyk/Dr96hbg9ZdKziRZ7kstZlJzGLXT/EYtZcVhKzbJO2Kl3JycWje9GYHiYrSq7Pwlbf8SDIktUlbNYr+PJ80E/h/TBZ84vZsB26hpwly48UihF8+yc8Ip2jyMK0i8kB+UrWcN6yQnauH/2wJGKVzBuJbS3LZtdnI4MmCV4ii/1Ds8um2c246bEzOmw+NUezonvw5ygty/Jt0RKpGiLI
+TBR2fQHbUeAokQEA6QsIBpYjhcbPyR2+otzaV5aDgBYf3EQP4GHQZZmnPBQxHrJmJjq0M/qh42nxVo/mWX44/NmuQGOwr6xrpFnbWtbj1csC96NtZSU/PXbVssDtaEtZnaR4a3rFssB9bStZH8ne0v11/6J8czbdlS3rhd/yL6bR7t20Uj+f/EnW3zNVLoeU2red3moHW5V1d929bxOrsnjDymRF1i8esTJZlvXCO2E2S7JeL/+eDAeykDXl9+rexFzWB7//9GYSWR/v5Uv9JbZj0ny5e3nvtLmqbWhMmtc8ZOZwOBxOPvgf3wADMAeOSbQAAAAASUVORK5CYII=</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <Language>en-US</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>4c400bc1-d6a0-41bb-88a1-3ced3915e258</rd:ReportID>
+</Report>
